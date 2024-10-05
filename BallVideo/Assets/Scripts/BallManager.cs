@@ -36,9 +36,7 @@ public class BallManager : MonoBehaviour
             newSpawnAmount = 2;
         }
 
-
-
-        for (int i = 0; i < newSpawnAmount; i++) 
+        for (int i = 0; i < newSpawnAmount; i++)
         {
             GameObject newBall = Instantiate(referenceObject, GetRandomPosition(), Quaternion.identity);
             newBall.GetComponent<SpriteRenderer>().color = colourOptions[UnityEngine.Random.Range(0, colourOptions.Length)];
