@@ -11,7 +11,7 @@ public class ExitCollision : MonoBehaviour
         {
             if (collision.GetComponent<BouncyBall>().hasEscaped != true)
             {
-                collision.GetComponent<BouncyBall>().RunEscapedProcess();
+                collision.GetComponent<BouncyBall>().StartEscapedProcess();
                 Debug.Log("Collision");
             }
         }

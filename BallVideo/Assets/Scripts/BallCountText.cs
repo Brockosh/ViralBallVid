@@ -16,6 +16,6 @@ public class BallCountText : MonoBehaviour
 
     private void UpdateHUD(int ballCount)
     {
-        myTMP.text = ballCount.ToString();
+        myTMP.text = $"Ball Count: {ballCount}";
     }
 }

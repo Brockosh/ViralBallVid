@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class BallManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class BallManager : MonoBehaviour
     public event Action<int> onBallCountChanged;
     public float radius = 1f;
 
+    public bool first = true;
 
     private void Start()
     {
@@ -24,6 +26,18 @@ public class BallManager : MonoBehaviour
 
     private void SpawnBall()
     {
+        if (first)
+        {
+            newSpawnAmount = 1;
+            first = false;
+        }
+        else
+        {
+            newSpawnAmount = 2;
+        }
+
+
+
         for (int i = 0; i < newSpawnAmount; i++) 
         {
             GameObject newBall = Instantiate(referenceObject, GetRandomPosition(), Quaternion.identity);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BouncyBall : MonoBehaviour
 {
     public bool hasEscaped = false;
-    [SerializeField] private float timeBeforeDestroy = 0.2f;
+    [SerializeField] private float timeBeforeDestroy = 3f;
 
     public void StartEscapedProcess()
     {
@@ -15,8 +15,8 @@ public class BouncyBall : MonoBehaviour
     public IEnumerator RunEscapedProcess()
     {
         hasEscaped = true;
-        yield return new WaitForSeconds(timeBeforeDestroy);
         GameManager.instance.CallOnBallEscaped();
+        yield return new WaitForSeconds(timeBeforeDestroy);
         Destroy(gameObject);
     }
 }

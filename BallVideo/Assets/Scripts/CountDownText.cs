@@ -27,7 +27,7 @@ public class CountDownText : MonoBehaviour
     private IEnumerator CountDown()
     {
 
-        while (countDownValue > 0) 
+        while (countDownValue > -1) 
         { 
             UpdateHUD(countDownValue);
             countDownValue--;

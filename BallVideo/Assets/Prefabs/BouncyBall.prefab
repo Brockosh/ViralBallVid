@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 948372837809065150}
   - component: {fileID: 3877716655171275469}
   - component: {fileID: 1102973979754876359}
+  - component: {fileID: 8282212415101893692}
   m_Layer: 0
   m_Name: BouncyBall
   m_TagString: Untagged
@@ -162,4 +163,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasEscaped: 0
-  timeBeforeDestroy: 0.01
+  timeBeforeDestroy: 3
+--- !u!58 &8282212415101893692
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114682077169299965}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

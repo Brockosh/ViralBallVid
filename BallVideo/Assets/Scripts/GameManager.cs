@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public event Action onBallEscaped;
-
     public BallManager ballManager;
 
     private void Awake()
