@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public event Action onBallEscaped;
 
     public BallManager ballManager;
+    public ProgressManager progressManager;
 
     private void Awake()
     {
@@ -20,7 +21,4 @@ public class GameManager : MonoBehaviour
         onBallEscaped?.Invoke();
         Debug.Log("OnBallEscaped called");
     }
-
-
-
 }

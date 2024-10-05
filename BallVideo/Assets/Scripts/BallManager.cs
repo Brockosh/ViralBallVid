@@ -22,9 +22,6 @@ public class BallManager : MonoBehaviour
         GameManager.instance.onBallEscaped += SpawnBall;
         GameManager.instance.onBallEscaped += DecrementBallCount;
         SpawnBall();
-        SpawnBall();
-        SpawnBall();
-        SpawnBall();
     }
 
     private void SpawnBall()
