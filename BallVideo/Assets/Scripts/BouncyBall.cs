@@ -6,7 +6,7 @@ public class BouncyBall : MonoBehaviour
 {
     public bool hasEscaped = false;
     [SerializeField] private float timeBeforeDestroy = 0.2f;
-    
+
     public void StartEscapedProcess()
     {
         StartCoroutine(RunEscapedProcess());
@@ -16,7 +16,7 @@ public class BouncyBall : MonoBehaviour
     {
         hasEscaped = true;
         yield return new WaitForSeconds(timeBeforeDestroy);
-        Destroy(gameObject);
         GameManager.instance.CallOnBallEscaped();
+        Destroy(gameObject);
     }
 }
