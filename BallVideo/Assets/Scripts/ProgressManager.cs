@@ -12,12 +12,20 @@ public class ProgressManager : MonoBehaviour
     private int amountOfTimeInSeconds;
     [SerializeField]
     private float timeBetweenDecrement = 1;
+    [SerializeField]
+    private Color fillColor;
+
+    public int AmountOfTimeInSeconds {  get { return amountOfTimeInSeconds; } }
+
     public event Action<float> onProgressUpdated;
     public event Action<int> onTimeRemainingUpdated;
+    public event Action<Color> onUpdateProgressColor;
 
     private void Start()
     {
         GameManager.instance.ballManager.onBallCountChanged += CalculateProgress;
+        onTimeRemainingUpdated?.Invoke(amountOfTimeInSeconds);
+        onUpdateProgressColor?.Invoke(fillColor);
         StartCountDown();
     }
 
@@ -40,6 +48,6 @@ public class ProgressManager : MonoBehaviour
     {
         float progressPercentage = ((float)currentBallCount / (float)amountOfBallsToWin) * 100f;
         onProgressUpdated?.Invoke(progressPercentage);
-        Debug.Log("yep");
+        Debug.Log(progressPercentage);
     }
 }

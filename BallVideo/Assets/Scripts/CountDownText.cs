@@ -12,6 +12,7 @@ public class CountDownText : MonoBehaviour
     {
         if (myTMP == null)
             myTMP = GetComponent<TextMeshProUGUI>();
+        UpdateHUD(GameManager.instance.progressManager.AmountOfTimeInSeconds);
         GameManager.instance.progressManager.onTimeRemainingUpdated += UpdateHUD;
     }
 

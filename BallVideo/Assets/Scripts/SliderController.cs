@@ -8,7 +8,7 @@ public class SliderController : MonoBehaviour
     [SerializeField]
     private Slider slider;
     [SerializeField]
-    private Image fillColour;
+    private Image fill;
 
     private void Start()
     {
@@ -18,11 +18,16 @@ public class SliderController : MonoBehaviour
         }
 
         GameManager.instance.progressManager.onProgressUpdated += UpdateSliderValue;
-        fillColour.color = Color.green;
+        GameManager.instance.progressManager.onUpdateProgressColor += UpdateFillColor;
     }
 
     private void UpdateSliderValue(float Value)
     {
         slider.value = Value;
+    }
+
+    private void UpdateFillColor(Color color)
+    {
+        fill.color = color;
     }
 }
