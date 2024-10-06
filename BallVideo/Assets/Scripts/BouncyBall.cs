@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BouncyBall : MonoBehaviour
 {
-    public bool hasEscaped = false;
     [SerializeField] private float timeBeforeDestroy = 3f;
+    private event Action onCollisionOccurred;
+    public bool hasEscaped = false;
 
     public void StartEscapedProcess()
     {
@@ -18,5 +20,11 @@ public class BouncyBall : MonoBehaviour
         GameManager.instance.CallOnBallEscaped();
         yield return new WaitForSeconds(timeBeforeDestroy);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameManager.instance.collisionManager.CallOnCollisionOccurred();
+        Debug.Log("Collision");
     }
 }

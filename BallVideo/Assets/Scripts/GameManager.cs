@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public BallManager ballManager;
     public ProgressManager progressManager;
+    public CollisionManager collisionManager;
 
     private void Awake()
     {
