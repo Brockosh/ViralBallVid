@@ -25,6 +25,5 @@ public class BouncyBall : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameManager.instance.collisionManager.CallOnCollisionOccurred();
-        Debug.Log("Collision");
     }
 }

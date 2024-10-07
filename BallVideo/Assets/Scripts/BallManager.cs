@@ -14,8 +14,9 @@ public class BallManager : MonoBehaviour
     private int ballCount = 0;
     public event Action<int> onBallCountChanged;
     public float radius = 1f;
-
     public bool first = true;
+
+    public int BallCount {  get { return ballCount; } }
 
     private void Start()
     {

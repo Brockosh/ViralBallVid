@@ -7,7 +7,6 @@ public class CollisionManager : MonoBehaviour
 {
     public event Action onCollisionOccurred;
 
-
     public void CallOnCollisionOccurred()
     {
         onCollisionOccurred?.Invoke();

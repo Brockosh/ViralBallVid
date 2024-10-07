@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,6 +16,14 @@ public class ProgressManager : MonoBehaviour
     [SerializeField]
     private Color fillColor;
 
+    private int startingAmountOfTime;
+    private float timePassedSinceGameStarted;
+
+    private bool hasFirstBallEscaped = false;
+    private float timeBeforeFirstBallEscaped;
+
+    private bool isGameOver;
+
     public int AmountOfTimeInSeconds {  get { return amountOfTimeInSeconds; } }
     public int AmountOfBallsToWIn {  get { return amountOfBallsToWin; } }
 
@@ -26,10 +35,22 @@ public class ProgressManager : MonoBehaviour
     private void Start()
     {
         GameManager.instance.ballManager.onBallCountChanged += CalculateProgress;
+        GameManager.instance.ballManager.onBallCountChanged += UnsubscribeBallEscapeCounter;
+
+        startingAmountOfTime = amountOfTimeInSeconds;
+
         onTimeRemainingUpdated += CheckGameOver;
         onTimeRemainingUpdated?.Invoke(amountOfTimeInSeconds);
         onUpdateProgressColor?.Invoke(fillColor);
         StartCountDown();
+    }
+
+    private void Update()
+    {
+        timePassedSinceGameStarted += Time.deltaTime;
+
+        if (!hasFirstBallEscaped)
+            timeBeforeFirstBallEscaped += Time.deltaTime;
     }
 
     private void StartCountDown()
@@ -54,7 +75,12 @@ public class ProgressManager : MonoBehaviour
 
         if (progressPercentage == 100)
         {
-            onGameComplete?.Invoke(true);
+            if (!isGameOver)
+            {
+                isGameOver = true;
+                onGameComplete?.Invoke(true);
+                CalculateGameStatistics();
+            }
         }
         Debug.Log(progressPercentage);
     }
@@ -63,7 +89,33 @@ public class ProgressManager : MonoBehaviour
     {
         if (timeRemaining == 0)
         {
-            onGameComplete?.Invoke(false);
+            if (!isGameOver)
+            {
+                isGameOver = true;
+                onGameComplete?.Invoke(false);
+                CalculateGameStatistics();
+            }
         }
     }
+
+    private void UnsubscribeBallEscapeCounter(int ballCount)
+    {
+        hasFirstBallEscaped = true;
+        GameManager.instance.ballManager.onBallCountChanged -= UnsubscribeBallEscapeCounter;
+    }
+    private BallBounceGame CalculateGameStatistics()
+    {
+        BallBounceGame ballBounceGame = new BallBounceGame();
+        ballBounceGame.howManyBallsFromVictory = AmountOfBallsToWIn - GameManager.instance.ballManager.BallCount;
+        ballBounceGame.timeBeforeFirstBallEscaped = timeBeforeFirstBallEscaped;
+        ballBounceGame.timeRemainingWhenGameFinished = startingAmountOfTime - (int)timePassedSinceGameStarted;
+
+        Debug.Log(ballBounceGame.howManyBallsFromVictory);
+        Debug.Log(ballBounceGame.timeBeforeFirstBallEscaped);
+        Debug.Log(ballBounceGame.timeRemainingWhenGameFinished);
+
+        return ballBounceGame;
+    }
+
+    
 }
