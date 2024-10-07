@@ -31,6 +31,7 @@ public class ProgressManager : MonoBehaviour
     public event Action<int> onTimeRemainingUpdated;
     public event Action<Color> onUpdateProgressColor;
     public event Action<bool> onGameComplete;
+    public event Action<BallBounceGame> passOnGameData;
 
     private void Start()
     {
@@ -103,7 +104,7 @@ public class ProgressManager : MonoBehaviour
         hasFirstBallEscaped = true;
         GameManager.instance.ballManager.onBallCountChanged -= UnsubscribeBallEscapeCounter;
     }
-    private BallBounceGame CalculateGameStatistics()
+    private void CalculateGameStatistics()
     {
         BallBounceGame ballBounceGame = new BallBounceGame();
         ballBounceGame.howManyBallsFromVictory = AmountOfBallsToWIn - GameManager.instance.ballManager.BallCount;
@@ -114,7 +115,7 @@ public class ProgressManager : MonoBehaviour
         Debug.Log(ballBounceGame.timeBeforeFirstBallEscaped);
         Debug.Log(ballBounceGame.timeRemainingWhenGameFinished);
 
-        return ballBounceGame;
+        passOnGameData?.Invoke(ballBounceGame);
     }
 
     
