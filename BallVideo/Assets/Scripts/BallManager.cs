@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class BallManager : MonoBehaviour
 {
-    [SerializeField] private GameObject referenceObject;
-    [SerializeField] private int newSpawnAmount = 2;
-    [SerializeField] private Color[] colourOptions;
+    private GameObject referenceObject;
+    private int newSpawnAmount = 2;
+    private Color[] colourOptions;
 
     private int ballCount = 0;
     public event Action<int> onBallCountChanged;
@@ -22,6 +22,10 @@ public class BallManager : MonoBehaviour
     {
         GameManager.instance.onBallEscaped += SpawnBall;
         GameManager.instance.onBallEscaped += DecrementBallCount;
+
+        referenceObject = GameManager.instance.gameModeSettings.objectToSpawn;
+        newSpawnAmount = GameManager.instance.gameModeSettings.newAmountToSpawn;
+        colourOptions = GameManager.instance.gameModeSettings.coloursToUse;
         SpawnBall();
     }
 

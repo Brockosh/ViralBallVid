@@ -7,9 +7,7 @@ using UnityEngine;
 
 public class ProgressManager : MonoBehaviour
 {
-    [SerializeField]
     private int amountOfBallsToWin;
-    [SerializeField]
     private int amountOfTimeInSeconds;
     [SerializeField]
     private float timeBetweenDecrement = 1;
@@ -37,6 +35,9 @@ public class ProgressManager : MonoBehaviour
     {
         GameManager.instance.ballManager.onBallCountChanged += CalculateProgress;
         GameManager.instance.ballManager.onBallCountChanged += UnsubscribeBallEscapeCounter;
+
+        amountOfBallsToWin = GameManager.instance.gameModeSettings.amountOfBallsToWin;
+        amountOfTimeInSeconds = GameManager.instance.gameModeSettings.amountOfTimeInSeconds;
 
         startingAmountOfTime = amountOfTimeInSeconds;
 

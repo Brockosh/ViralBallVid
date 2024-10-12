@@ -7,9 +7,7 @@ public class TargetText : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI myTMP;
-    [SerializeField]
     private Color winnerColor;
-    [SerializeField]
     private Color loserColor;
 
     private void Start()
@@ -20,7 +18,9 @@ public class TargetText : MonoBehaviour
         }
 
         GameManager.instance.progressManager.onGameComplete += UpdateText;
-        myTMP.text = $"Target: {GameManager.instance.progressManager.AmountOfBallsToWIn}";
+        winnerColor = GameManager.instance.gameModeSettings.winColor;
+        loserColor = GameManager.instance.gameModeSettings.loseColor;
+        myTMP.text = $"Target: {GameManager.instance.gameModeSettings.amountOfBallsToWin}";
     }
 
 
