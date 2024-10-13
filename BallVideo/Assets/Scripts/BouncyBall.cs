@@ -6,8 +6,15 @@ using UnityEngine;
 public class BouncyBall : MonoBehaviour
 {
     [SerializeField] private float timeBeforeDestroy = 3f;
-    private event Action onCollisionOccurred;
+    [SerializeField] private Rigidbody2D rb;
+    private float maxVelocity = 10;
     public bool hasEscaped = false;
+
+    private void Start()
+    {
+        if (rb != null)
+            rb = GetComponent<Rigidbody2D>();
+    }
 
     public void StartEscapedProcess()
     {

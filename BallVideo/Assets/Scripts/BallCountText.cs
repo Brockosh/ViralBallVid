@@ -7,11 +7,7 @@ public class BallCountText : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI myTMP;
-    [SerializeField]
-    private Color winnerColor;
-    [SerializeField]
-    private Color loserColor;
-    private bool isGameOver = false;
+    private bool canUpdate = true;
     void Start()
     {
         if (myTMP == null)
@@ -22,21 +18,21 @@ public class BallCountText : MonoBehaviour
 
     private void UpdateHUD(int ballCount)
     {
-        if(!isGameOver)
-            myTMP.text = $"Ball Count: {ballCount}";
+        if(canUpdate)
+            myTMP.text = GameManager.instance.gameModeSettings.thirdLineText + ballCount;
     }
 
     private void UpdateForEndGame(bool isWinner)
     {
-        isGameOver = true;
-        myTMP.text = myTMP.text = $"Ball Count: {GameManager.instance.ballManager.BallCount}";
         if (!isWinner)
         {
-            myTMP.color = loserColor;
+            canUpdate = false;
+            myTMP.color = GameManager.instance.gameModeSettings.loseColor;
         }
         else
         {
-            myTMP.color = winnerColor;
+            myTMP.color = myTMP.color = GameManager.instance.gameModeSettings.winColor;
+
         }
     }
 }

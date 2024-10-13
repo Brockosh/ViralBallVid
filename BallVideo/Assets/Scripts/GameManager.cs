@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameModeSettings gameModeSettings;
+    public GameMode gameModeSettings;
 
 
     public BallManager ballManager;
@@ -15,9 +15,15 @@ public class GameManager : MonoBehaviour
 
     public event Action onBallEscaped;
 
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        progressManager.passOnGameData += gameModeSettings.isValidGame;
     }
 
     public void CallOnBallEscaped()

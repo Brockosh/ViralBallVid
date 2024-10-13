@@ -5,7 +5,7 @@ using UnityEngine;
 public class ColorInterpolator : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer; 
-    public List<Color> pastelColors;      
+    private Color[] coloursToInterpolate;      
     public float transitionTime = 2f;     
     private int currentColorIndex = 0;
 
@@ -14,15 +14,16 @@ public class ColorInterpolator : MonoBehaviour
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
 
+        coloursToInterpolate = GameManager.instance.gameModeSettings.coloursToUse;
         StartCoroutine(InterpolateColors());
-    }
+}
 
     private IEnumerator InterpolateColors()
     {
         while (true)
         {
-            Color startColor = pastelColors[currentColorIndex];
-            Color endColor = pastelColors[(currentColorIndex + 1) % pastelColors.Count];
+            Color startColor = coloursToInterpolate[currentColorIndex];
+            Color endColor = coloursToInterpolate[(currentColorIndex + 1) % coloursToInterpolate.Length];
             float elapsedTime = 0f;
 
             while (elapsedTime < transitionTime)
@@ -34,7 +35,7 @@ public class ColorInterpolator : MonoBehaviour
 
             spriteRenderer.color = endColor;
 
-            currentColorIndex = (currentColorIndex + 1) % pastelColors.Count;
+            currentColorIndex = (currentColorIndex + 1) % coloursToInterpolate.Length;
 
             yield return new WaitForSeconds(1f); 
         }

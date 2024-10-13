@@ -20,7 +20,7 @@ public class TargetText : MonoBehaviour
         GameManager.instance.progressManager.onGameComplete += UpdateText;
         winnerColor = GameManager.instance.gameModeSettings.winColor;
         loserColor = GameManager.instance.gameModeSettings.loseColor;
-        myTMP.text = $"Target: {GameManager.instance.gameModeSettings.amountOfBallsToWin}";
+        myTMP.text = GameManager.instance.gameModeSettings.firstLineText;
     }
 
 
@@ -28,12 +28,12 @@ public class TargetText : MonoBehaviour
     {
         if (isWinner)
         {
-            myTMP.text = "Success!";
+            myTMP.text = GameManager.instance.gameModeSettings.winningText;
             myTMP.color = winnerColor;
         }
         else
         {
-            myTMP.text = "Failed!";
+            myTMP.text = GameManager.instance.gameModeSettings.losingText;
             myTMP.color = loserColor;
         }
 

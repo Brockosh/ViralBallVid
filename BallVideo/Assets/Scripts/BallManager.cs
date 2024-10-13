@@ -38,7 +38,7 @@ public class BallManager : MonoBehaviour
         }
         else
         {
-            newSpawnAmount = 2;
+            newSpawnAmount = GameManager.instance.gameModeSettings.newAmountToSpawn;
         }
 
         for (int i = 0; i < newSpawnAmount; i++)

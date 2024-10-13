@@ -257,14 +257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 54586470}
-  pastelColors:
-  - {r: 0.83137256, g: 0.52156866, b: 0.52156866, a: 1}
-  - {r: 0.7924528, g: 0.50462794, b: 0.7743695, a: 1}
-  - {r: 0.6659889, g: 0.5584282, b: 0.8396226, a: 1}
-  - {r: 0.53092736, g: 0.5908045, b: 0.9150943, a: 1}
-  - {r: 0.4761926, g: 0.68818367, b: 0.8207547, a: 1}
-  - {r: 0.5333304, g: 0.8018868, b: 0.59369683, a: 1}
-  - {r: 0.8315381, g: 0.8396226, b: 0.51882344, a: 1}
   transitionTime: 2
 --- !u!1 &234612287
 GameObject:
@@ -1026,8 +1018,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTMP: {fileID: 639236883}
-  winnerColor: {r: 0.6036527, g: 0.8301887, b: 0.54432184, a: 1}
-  loserColor: {r: 0.8784314, g: 0.46666667, b: 0.46666667, a: 1}
 --- !u!114 &639236883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,6 +1287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeDestroy: 0.2
+  rb: {fileID: 0}
   hasEscaped: 0
 --- !u!1 &880260545
 GameObject:
@@ -1742,7 +1733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9442c0dfaf2bec418ad0d81c0f69c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameModeSettings: {fileID: 11400000, guid: d469158a78bf0ac4489801e515d2221c, type: 2}
+  gameModeSettings: {fileID: 11400000, guid: 96da3a5fe8081e846a384e294f854ec0, type: 2}
   ballManager: {fileID: 787577210}
   progressManager: {fileID: 2037095366}
   collisionManager: {fileID: 1110171742}
@@ -3098,7 +3089,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenDecrement: 1
-  fillColor: {r: 0.6272553, g: 0.83137256, b: 0.6, a: 1}
 --- !u!4 &2037095367
 Transform:
   m_ObjectHideFlags: 0

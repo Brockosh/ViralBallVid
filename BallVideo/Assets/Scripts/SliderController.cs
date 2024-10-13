@@ -18,16 +18,11 @@ public class SliderController : MonoBehaviour
         }
 
         GameManager.instance.progressManager.onProgressUpdated += UpdateSliderValue;
-        GameManager.instance.progressManager.onUpdateProgressColor += UpdateFillColor;
+        fill.color = GameManager.instance.gameModeSettings.sliderFillColor;
     }
 
     private void UpdateSliderValue(float Value)
     {
         slider.value = Value;
-    }
-
-    private void UpdateFillColor(Color color)
-    {
-        fill.color = color;
     }
 }

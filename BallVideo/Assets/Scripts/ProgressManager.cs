@@ -11,8 +11,6 @@ public class ProgressManager : MonoBehaviour
     private int amountOfTimeInSeconds;
     [SerializeField]
     private float timeBetweenDecrement = 1;
-    [SerializeField]
-    private Color fillColor;
 
     private int startingAmountOfTime;
     private float timePassedSinceGameStarted;
@@ -20,16 +18,18 @@ public class ProgressManager : MonoBehaviour
     private bool hasFirstBallEscaped = false;
     private float timeBeforeFirstBallEscaped;
 
+
     private bool isGameOver;
 
     public int AmountOfTimeInSeconds {  get { return amountOfTimeInSeconds; } }
     public int AmountOfBallsToWIn {  get { return amountOfBallsToWin; } }
+    public float TimeBeforeFirstBallEscaped { get { return timeBeforeFirstBallEscaped;  } }
+    public float TimePassedSinceGameStarted {  get { return timePassedSinceGameStarted; } }
 
     public event Action<float> onProgressUpdated;
     public event Action<int> onTimeRemainingUpdated;
-    public event Action<Color> onUpdateProgressColor;
     public event Action<bool> onGameComplete;
-    public event Action<BallBounceGame> passOnGameData;
+    public event Action passOnGameData;
 
     private void Start()
     {
@@ -43,7 +43,6 @@ public class ProgressManager : MonoBehaviour
 
         onTimeRemainingUpdated += CheckGameOver;
         onTimeRemainingUpdated?.Invoke(amountOfTimeInSeconds);
-        onUpdateProgressColor?.Invoke(fillColor);
         StartCountDown();
     }
 
@@ -75,12 +74,14 @@ public class ProgressManager : MonoBehaviour
         float progressPercentage = ((float)currentBallCount / (float)amountOfBallsToWin) * 100f;
         onProgressUpdated?.Invoke(progressPercentage);
 
-        if (progressPercentage == 100)
+        //Bad work around as the win triggers one ball before at the moment
+        if (progressPercentage > 100)
         {
             if (!isGameOver)
             {
                 isGameOver = true;
                 onGameComplete?.Invoke(true);
+                passOnGameData?.Invoke();
                 CalculateGameStatistics();
             }
         }
@@ -95,6 +96,7 @@ public class ProgressManager : MonoBehaviour
             {
                 isGameOver = true;
                 onGameComplete?.Invoke(false);
+                passOnGameData?.Invoke();
                 CalculateGameStatistics();
             }
         }
@@ -116,7 +118,7 @@ public class ProgressManager : MonoBehaviour
         Debug.Log(ballBounceGame.timeBeforeFirstBallEscaped);
         Debug.Log(ballBounceGame.timeRemainingWhenGameFinished);
 
-        passOnGameData?.Invoke(ballBounceGame);
+        //passOnGameData?.Invoke(ballBounceGame);
     }
 
     
